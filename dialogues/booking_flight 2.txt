@@ -1,0 +1,100 @@
+title: Booking a Flight
+speaker: Sarah
+text: Hey, have you booked your flight to New York yet?
+pt: Ei, você já reservou seu voo para Nova York?
+es: ¿Ya reservaste tu vuelo a Nueva York?
+
+speaker: Jake
+text: Not yet! I'm still comparing prices. When are you planning to go?
+pt: Ainda não! Tô comparando os preços. Quando você planeja ir?
+es: ¡Todavía no! Estoy comparando precios. ¿Cuándo planeas ir?
+
+speaker: Sarah
+text: Mid-September. Tickets are cheaper after Labor Day.
+pt: Meados de setembro. Passagens ficam mais baratas depois do Dia do Trabalho.
+es: Mediados de septiembre. Los boletos son más baratos después del Día del Trabajo.
+
+speaker: Jake
+text: Smart! Should we fly into JFK or LaGuardia?
+pt: Esperta! Vamos voar pro JFK ou pro LaGuardia?
+es: ¡Inteligente! ¿Deberíamos volar a JFK o a LaGuardia?
+
+speaker: Sarah
+text: JFK's better—more flight options and cheaper Ubers to the city.
+pt: JFK é melhor - mais opções de voo e Uber mais barato pro centro.
+es: JFK es mejor: más opciones de vuelo y Ubers más baratos a la ciudad.
+
+speaker: Jake
+text: Good point. Are you booking direct or with a layover?
+pt: Faz sentido. Vai pegar voo direto ou com escala?
+es: Buen punto. ¿Reservarás vuelo directo o con escala?
+
+speaker: Sarah
+text: Direct, even if it costs extra. I hate connecting flights.
+pt: Direto, mesmo se for mais caro. Odeio voos com conexão.
+es: Directo, aunque cueste más. Odio los vuelos con conexión.
+
+speaker: Jake
+text: Same. Which airline are you using?
+pt: Também. Qual companhia você vai usar?
+es: Igual. ¿Qué aerolínea vas a usar?
+
+speaker: Sarah
+text: Probably Delta. Their rewards program is awesome.
+pt: Provavelmente a Delta. O programa de milhas deles é ótimo.
+es: Probablemente Delta. Su programa de recompensas es genial.
+
+speaker: Jake
+text: Nice! I'll check their deals too. Window or aisle seat?
+pt: Legal! Vou ver as promoções deles também. Janela ou corredor?
+es: ¡Genial! También revisaré sus ofertas. ¿Ventana o pasillo?
+
+speaker: Sarah
+text: Aisle, 100%. I need legroom. You?
+pt: Corredor, com certeza. Preciso de espaço pras pernas. E você?
+es: Pasillo, 100%. Necesito espacio para las piernas. ¿Y tú?
+
+speaker: Jake
+text: Window—I like staring at clouds.
+pt: Janela - gosto de ficar olhando as nuvens.
+es: Ventana: me gusta mirar las nubes.
+
+speaker: Sarah
+text: Haha, fair. Don't forget to pre-book your baggage!
+pt: Haha, justo. Não esquece de reservar sua bagagem antes!
+es: Jaja, justo. ¡No olvides reservar tu equipaje con anticipación!
+
+speaker: Jake
+text: Oh right, thanks! Carry-on only or checked luggage?
+pt: Ah verdade, valeu! Só bagagem de mão ou vai despachar?
+es: Ah cierto, ¡gracias! ¿Solo equipaje de mano o facturado?
+
+speaker: Sarah
+text: Just carry-on. Saves time and money.
+pt: Só de mão. Economiza tempo e dinheiro.
+es: Solo equipaje de mano. Ahorra tiempo y dinero.
+
+speaker: Jake
+text: True. Did you use any discount codes?
+pt: Verdade. Usou algum código de desconto?
+es: Cierto. ¿Usaste algún código de descuento?
+
+speaker: Sarah
+text: Yeah, I found a 10% off coupon on Kayak.
+pt: Usei, achei um cupom de 10% no Kayak.
+es: Sí, encontré un cupón del 10% de descuento en Kayak.
+
+speaker: Jake
+text: Sweet! I'll Google some before I book.
+pt: Massa! Vou pesquisar uns antes de reservar.
+es: ¡Genial! Buscaré algunos antes de reservar.
+
+speaker: Sarah
+text: Pro tip: Clear your cookies—prices jump if you keep searching.
+pt: Dica de profissional: limpa seus cookies - os preços aumentam se você ficar pesquisando.
+es: Consejo profesional: borra tus cookies, los precios suben si sigues buscando.
+
+speaker: Jake
+text: Whoa, sneaky! Thanks, I'll book tonight and text you my flight details.
+pt: Nossa, que sacanagem! Valeu, vou reservar hoje à noite e te mando os detalhes do voo.
+es: ¡Vaya, qué tramposo! Gracias, reservaré esta noche y te enviaré los detalles de mi vuelo.

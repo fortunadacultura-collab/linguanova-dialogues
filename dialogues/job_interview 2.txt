@@ -1,0 +1,131 @@
+title: Job Interview
+speaker: Interviewer
+text: Good morning! Thank you for coming in today.
+pt: Bom dia! Obrigado por vir hoje.
+es: ¡Buenos días! Gracias por venir hoy.
+
+speaker: Candidate
+text: Good morning! It's my pleasure to be here.
+pt: Bom dia! É um prazer estar aqui.
+es: ¡Buenos días! Es un placer estar aquí.
+
+speaker: Interviewer
+text: Let's begin. Could you walk me through your resume?
+pt: Vamos começar. Poderia me falar sobre seu currículo?
+es: Comencemos. ¿Podría hablarme sobre su currículum?
+
+speaker: Candidate
+text: Certainly. I have 5 years in digital marketing, specializing in SEO and content strategy.
+pt: Certamente. Tenho 5 anos em marketing digital, com especialização em SEO e estratégia de conteúdo.
+es: Por supuesto. Tengo 5 años en marketing digital, especializado en SEO y estrategia de contenido.
+
+speaker: Interviewer
+text: What attracted you to apply for this position specifically?
+pt: O que a atraiu a se candidatar a esta posição especificamente?
+es: ¿Qué le atrajo de este puesto específicamente?
+
+speaker: Candidate
+text: Your company's reputation for innovation aligns perfectly with my passion for creative problem-solving.
+pt: A reputação de inovação da sua empresa se alinha perfeitamente com minha paixão por soluções criativas.
+es: La reputación de innovación de su empresa se alinea perfectamente con mi pasión por soluciones creativas.
+
+speaker: Interviewer
+text: Describe a time you faced a difficult work situation. How did you handle it?
+pt: Descreva uma situação difícil no trabalho. Como você lidou com isso?
+es: Describa una situación laboral difícil. ¿Cómo la manejó?
+
+speaker: Candidate
+text: When our campaign underperformed, I led a team analysis that identified key improvements, increasing ROI by 40%.
+pt: Quando nossa campanha teve baixo desempenho, liderei uma análise que identificou melhorias chave, aumentando o ROI em 40%.
+es: Cuando nuestra campaña tuvo bajo rendimiento, lideré un análisis que identificó mejoras clave, aumentando el ROI en 40%.
+
+speaker: Interviewer
+text: How do you prioritize tasks when managing multiple projects?
+pt: Como você prioriza tarefas ao gerenciar múltiplos projetos?
+es: ¿Cómo prioriza tareas al gestionar múltiples proyectos?
+
+speaker: Candidate
+text: I use the Eisenhower Matrix to categorize tasks by urgency and importance, ensuring nothing critical gets overlooked.
+pt: Uso a Matriz Eisenhower para categorizar tarefas por urgência e importância, garantindo que nada crítico seja esquecido.
+es: Uso la Matriz Eisenhower para categorizar tareas por urgencia e importancia, asegurando que nada crítico pase desapercibido.
+
+speaker: Interviewer
+text: Tell me about a time you disagreed with a manager's approach.
+pt: Conte-me sobre quando você discordou da abordagem de um gerente.
+es: Cuénteme sobre cuando no estuvo de acuerdo con el enfoque de un gerente.
+
+speaker: Candidate
+text: I respectfully presented data showing alternative strategies, which we ultimately implemented with great success.
+pt: Apresentei respeitosamente dados mostrando estratégias alternativas, que acabamos implementando com grande sucesso.
+es: Presenté respetuosamente datos mostrando estrategias alternativas, que finalmente implementamos con gran éxito.
+
+speaker: Interviewer
+text: How do you stay updated with industry trends?
+pt: Como você se mantém atualizado com as tendências do setor?
+es: ¿Cómo se mantiene actualizado con las tendencias de la industria?
+
+speaker: Candidate
+text: I dedicate 5 hours weekly to professional development through courses, webinars, and industry publications.
+pt: Dedico 5 horas semanais ao desenvolvimento profissional através de cursos, webinars e publicações do setor.
+es: Dedico 5 horas semanales a desarrollo profesional mediante cursos, webinars y publicaciones de la industria.
+
+speaker: Interviewer
+text: Describe your ideal work environment.
+pt: Descreva seu ambiente de trabalho ideal.
+es: Describa su ambiente de trabajo ideal.
+
+speaker: Candidate
+text: I thrive in collaborative spaces that balance autonomy with teamwork and value continuous learning.
+pt: Eu prospero em espaços colaborativos que equilibram autonomia com trabalho em equipe e valorizam aprendizado contínuo.
+es: Prospero en espacios colaborativos que equilibran autonomía con trabajo en equipo y valoran el aprendizaje continuo.
+
+speaker: Interviewer
+text: Where do you see yourself in three years?
+pt: Onde você se vê em três anos?
+es: ¿Dónde se ve en tres años?
+
+speaker: Candidate
+text: In a leadership position where I can mentor others while still being hands-on with strategic projects.
+pt: Em uma posição de liderança onde posso orientar outros enquanto ainda trabalho diretamente em projetos estratégicos.
+es: En un puesto de liderazgo donde pueda orientar a otros mientras sigo involucrado en proyectos estratégicos.
+
+speaker: Interviewer
+text: What would your references say about your work style?
+pt: O que suas referências diriam sobre seu estilo de trabalho?
+es: ¿Qué dirían sus referencias sobre su estilo de trabajo?
+
+speaker: Candidate
+text: They'd describe me as detail-oriented yet adaptable, with strong problem-solving skills and reliability.
+pt: Elas me descreveriam como detalhista mas adaptável, com fortes habilidades de resolução de problemas e confiabilidade.
+es: Me describirían como detallista pero adaptable, con fuertes habilidades para resolver problemas y confiabilidad.
+
+speaker: Interviewer
+text: Do you have any questions for me about the role?
+pt: Você tem alguma pergunta para mim sobre a função?
+es: ¿Tiene alguna pregunta para mí sobre el puesto?
+
+speaker: Candidate
+text: Yes. Could you describe the team dynamics and how this role contributes to larger company goals?
+pt: Sim. Poderia descrever a dinâmica da equipe e como esta função contribui para os objetivos maiores da empresa?
+es: Sí. ¿Podría describir la dinámica del equipo y cómo este puesto contribuye a los objetivos generales de la empresa?
+
+speaker: Interviewer
+text: Excellent question. We value cross-department collaboration, and this role bridges marketing with product development.
+pt: Excelente pergunta. Valorizamos colaboração entre departamentos, e esta função conecta marketing com desenvolvimento de produtos.
+es: Excelente pregunta. Valorizamos la colaboración interdepartamental, y este puesto conecta marketing con desarrollo de productos.
+
+speaker: Candidate
+text: Thank you. That aligns well with my experience and interests.
+pt: Obrigada. Isso se alinha bem com minha experiência e interesses.
+es: Gracias. Eso se alinea bien con mi experiencia e intereses.
+
+speaker: Interviewer
+text: We'll be making decisions by Friday. Thank you for your time today.
+pt: Tomaremos decisões até sexta-feira. Obrigado pelo seu tempo hoje.
+es: Tomaremos decisiones para el viernes. Gracias por su tiempo hoy.
+
+speaker: Candidate
+text: Thank you for the opportunity. I look forward to hearing from you.
+pt: Obrigada pela oportunidade. Estou ansiosa para o retorno.
+es: Gracias por la oportunidad. Espero tener noticias suyas.
+```

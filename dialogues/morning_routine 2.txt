@@ -1,0 +1,105 @@
+title: Morning Routine
+speaker: Sarah
+text: Ugh... five more minutes. Why do mornings exist?
+pt: Aff... mais cinco minutinhos. Por que as manhãs existem?
+es: Uf... cinco minutos más. ¿Por qué existen las mañanas?
+
+speaker: Jake
+text: (blender noises) Rise and shine! My smoothie could wake the dead!
+pt: (faz barulho de liquidificador) Acorda, dorminhoco! Meu smoothie ressuscita morto!
+es: (hace ruido de licuadora) ¡Levántate y brilla! ¡Mi batido despertaría a los muertos!
+
+speaker: Sarah
+text: That's not a smoothie, that's a crime against breakfast.
+pt: Isso não é smoothie, é um crime contra o café da manhã.
+es: Eso no es un batido, es un crimen contra el desayuno.
+
+speaker: Jake
+text: At least I'm vertical! You look like a zombie in pajamas.
+pt: Pelo menos tô em pé! Você parece um zumbi de pijama.
+es: ¡Al menos estoy vertical! Pareces un zombi en pijama.
+
+speaker: Sarah
+text: (grabs coffee) I'm 73% caffeine now. Speak slowly.
+pt: (pega o café) Agora sou 73% cafeína. Fala devagar.
+es: (toma el café) Ahora soy 73% cafeína. Habla despacio.
+
+speaker: Jake
+text: Did you even brush your teeth or go straight to coffee?
+pt: Você escovou os dentes ou foi direto pro café?
+es: ¿Te lavaste los dientes o fuiste directo al café?
+
+speaker: Sarah
+text: Coffee IS toothpaste. Adulting 101.
+pt: Café É pasta de dente. Vida adulta básica.
+es: El café ES pasta dental. Adulting 101.
+
+speaker: Jake
+text: (sprays vitamins) Meanwhile, I'm over here winning at mornings.
+pt: (usa spray de vitaminas) Enquanto isso, eu tô arrasando nas manhãs.
+es: (aplica spray de vitaminas) Mientras tanto, yo estoy ganando en las mañanas.
+
+speaker: Sarah
+text: Your energy is illegal before 9am. Pass the Pop-Tarts.
+pt: Sua energia é crime antes das 9h. Passa os Pop-Tarts.
+es: Tu energía es ilegal antes de las 9am. Pasa los Pop-Tarts.
+
+speaker: Jake
+text: Those aren't food! They're sugary cardboard!
+pt: Isso não é comida! É papelão açucarado!
+es: ¡Eso no es comida! ¡Es cartón azucarado!
+
+speaker: Sarah
+text: (mouth full) Delicious cardboard. Breakfast of champions.
+pt: (falando com a boca cheia) Papelão delicioso. Café dos campeões.
+es: (hablando con la boca llena) Delicioso cartón. Desayuno de campeones.
+
+speaker: Jake
+text: I'm making eggs. Want some actual protein?
+pt: Tô fazendo ovos. Quer proteína de verdade?
+es: Estoy haciendo huevos. ¿Quieres proteína real?
+
+speaker: Sarah
+text: Only if you bring them to my blanket fort.
+pt: Só se trouxer no meu forte de cobertas.
+es: Solo si me los traes a mi fuerte de mantas.
+
+speaker: Jake
+text: (flips pancake) Your adult card is revoked.
+pt: (vira a panqueca) Seu cartão de adulto tá cancelado.
+es: (voltea el panqueque) Tu carnet de adulto está revocado.
+
+speaker: Sarah
+text: Joke's on you - I never applied for one.
+pt: Tô rindo - nunca pedi esse cartão.
+es: Gracioso - nunca solicité uno.
+
+speaker: Jake
+text: (sets alarm earlier) Tomorrow we're fixing this routine.
+pt: (programa o alarme) Amanhã a gente conserta essa rotina.
+es: (programa la alarma) Mañana arreglamos esta rutina.
+
+speaker: Sarah
+text: (steals pancake) Or... we accept I'm a night person.
+pt: (pega uma panqueca) Ou... aceita que sou noturna.
+es: (toma un panqueque) O... aceptamos que soy noctámbula.
+
+speaker: Jake
+text: (sighs) Fine. But at least change out of pajamas?
+pt: (suspira) Tá. Mas pelo menos troca o pijama?
+es: (suspira) Bien. ¿Pero al menos cámbiate el pijama?
+
+speaker: Sarah
+text: (wraps blanket like cape) This is my work robe now.
+pt: (cobre-se com o cobertor) Isso agora é meu traje de trabalho.
+es: (se envuelve en la manta) Esta es mi túnica laboral ahora.
+
+speaker: Jake
+text: (laughs) I give up. More coffee?
+pt: (dá risada) Desisto. Quer mais café?
+es: (se ríe) Me rindo. ¿Más café?
+
+speaker: Sarah
+text: (clinks mugs) Now you're speaking my language.
+pt: (bate os copos) Agora sim falando minha língua.
+es: (choca las tazas) Ahora sí hablas mi idioma.

@@ -597,6 +597,11 @@ body {
   min-width: 52px;
   min-height: 48px;
   font-weight: 500;
+  /* Ajuste para centralizar conteúdo verticalmente */
+  justify-content: center;
+  /* Garantir que os ícones sejam visíveis */
+  position: relative;
+  z-index: 1;
 }
 
 .message-btn.play-btn {
@@ -618,6 +623,8 @@ body {
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+  display: block !important;
+  flex-shrink: 0;
 }
 
 .btn-text {
@@ -945,6 +952,120 @@ footer {
   margin-top: 3rem;
 }
 
+/* ============================================
+   SOLUÇÃO PARA OS PROBLEMAS DE ALINHAMENTO
+   ============================================ */
+
+/* Ajustes específicos para os botões de ação das mensagens */
+.message-btn {
+  /* Centralizar conteúdo vertical e horizontalmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Garantir tamanho mínimo para toque em dispositivos móveis */
+  min-height: 48px;
+  min-width: 52px;
+  /* Espaçamento interno consistente */
+  padding: 12px 16px;
+  /* Melhorar o alinhamento visual */
+  line-height: 1;
+}
+
+/* Ajuste específico para ícones nos botões */
+.message-btn i {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Remover texto em dispositivos móveis para melhorar o visual */
+@media (max-width: 768px) {
+  .btn-text {
+    display: none;
+  }
+  
+  .message-btn {
+    padding: 12px;
+    min-width: 48px;
+  }
+  
+  /* Aumentar o tamanho dos ícones em dispositivos móveis */
+  .message-btn i {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Ajustes específicos para iOS (iPhone) */
+@supports (-webkit-touch-callout: none) {
+  .message-btn {
+    -webkit-tap-highlight-color: transparent;
+    padding: 14px 16px;
+  }
+  
+  .message-btn i {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    font-size: 20px;
+  }
+}
+
+/* Ajustes específicos para Android */
+@media (-webkit-device-pixel-ratio: 2) and (max-width: 768px) {
+  .message-btn i {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+  
+  .message-btn {
+    min-height: 52px;
+    min-width: 56px;
+  }
+}
+
+/* Ajuste para telas muito pequenas (smartphones menores) */
+@media (max-width: 360px) {
+  .message-actions {
+    gap: 8px;
+  }
+  
+  .message-btn {
+    min-width: 44px;
+    padding: 10px;
+  }
+  
+  .message-btn i {
+    font-size: 18px;
+  }
+}
+
+/* Garantir que os botões de player também estejam bem dimensionados */
+.player-btn {
+  width: 56px;
+  height: 56px;
+}
+
+.player-btn i {
+  font-size: 20px;
+}
+
+@media (max-width: 768px) {
+  .player-btn {
+    width: 52px;
+    height: 52px;
+  }
+  
+  .player-btn i {
+    font-size: 18px;
+  }
+}
+
 /* Responsividade para o navbar */
 @media (max-width: 1100px) {
   .nav-links {
@@ -1114,31 +1235,5 @@ footer {
   
   .language-selector-wrapper {
       display: none;
-  }
-}
-
-/* ajuste nos ícons para mobile 1 */
-.message-btn {
-  /* Garantir que os ícones sejam visíveis */
-  position: relative;
-  z-index: 1;
-}
-
-.message-btn svg {
-  width: 18px !important;
-  height: 18px !important;
-  display: block !important;
-  flex-shrink: 0;
-}
-
-/* Estilos específicos para iOS */
-@supports (-webkit-touch-callout: none) {
-  .message-btn {
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .message-btn svg {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
   }
 }

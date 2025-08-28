@@ -1116,3 +1116,29 @@ footer {
       display: none;
   }
 }
+
+/* ajuste nos ícons para mobile 1 */
+.message-btn {
+  /* Garantir que os ícones sejam visíveis */
+  position: relative;
+  z-index: 1;
+}
+
+.message-btn svg {
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+  flex-shrink: 0;
+}
+
+/* Estilos específicos para iOS */
+@supports (-webkit-touch-callout: none) {
+  .message-btn {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .message-btn svg {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}

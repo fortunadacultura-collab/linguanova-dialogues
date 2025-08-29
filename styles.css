@@ -964,7 +964,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Garantir tamanho mínimo para toque em dispositivos móveis */
+  /* Garantir tamanho mínimo para toque in dispositivos móveis */
   min-height: 48px;
   min-width: 52px;
   /* Espaçamento interno consistente */
@@ -974,7 +974,7 @@ footer {
 }
 
 /* Ajuste específico para ícones nos botões */
-.message-btn i {
+.message-btn i, .message-btn svg {
   font-size: 18px;
   width: 18px;
   height: 18px;
@@ -992,7 +992,7 @@ footer {
 /* Em dispositivos móveis, esconder o texto por padrão */
 @media (max-width: 768px) {
   .btn-text {
-    display: none;
+    display: none !important;
     opacity: 0;
     width: 0;
     overflow: hidden;
@@ -1005,20 +1005,9 @@ footer {
   }
   
   /* Aumentar o tamanho dos ícones em dispositivos móveis */
-  .message-btn i {
-    font-size: 20px;
+  .message-btn i, .message-btn svg {
     width: 20px;
     height: 20px;
-  }
-  
-  /* Mostrar texto quando o botão estiver ativo/focado */
-  .message-btn.active .btn-text,
-  .message-btn:focus .btn-text,
-  .message-btn:hover .btn-text {
-    display: inline;
-    opacity: 1;
-    width: auto;
-    margin-left: 8px;
   }
 }
 
@@ -1029,17 +1018,17 @@ footer {
     padding: 14px 16px;
   }
   
-  .message-btn i {
+  .message-btn i, .message-btn svg {
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    font-size: 20px;
+    width: 20px;
+    height: 20px;
   }
 }
 
 /* Ajustes específicos para Android */
 @media (-webkit-device-pixel-ratio: 2) and (max-width: 768px) {
-  .message-btn i {
-    font-size: 22px;
+  .message-btn i, .message-btn svg {
     width: 22px;
     height: 22px;
   }
@@ -1061,8 +1050,9 @@ footer {
     padding: 10px;
   }
   
-  .message-btn i {
-    font-size: 18px;
+  .message-btn i, .message-btn svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -1072,8 +1062,9 @@ footer {
   height: 56px;
 }
 
-.player-btn i {
-  font-size: 20px;
+.player-btn i, .player-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
 @media (max-width: 768px) {
@@ -1082,8 +1073,9 @@ footer {
     height: 52px;
   }
   
-  .player-btn i {
-    font-size: 18px;
+  .player-btn i, .player-btn svg {
+    width: 18px;
+    height: 18px;
   }
 }
 

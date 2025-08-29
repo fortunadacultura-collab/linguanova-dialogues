@@ -597,7 +597,7 @@ body {
   min-width: 52px;
   min-height: 48px;
   font-weight: 500;
-  /* Ajuste para centralizar conteúdo verticalmente */
+  /* Centralizar conteúdo vertical e horizontalmente */
   justify-content: center;
   /* Garantir que os ícones sejam visíveis */
   position: relative;
@@ -629,6 +629,8 @@ body {
 
 .btn-text {
   white-space: nowrap;
+  /* Mostrar texto apenas em desktop por padrão */
+  display: inline;
 }
 
 .translation-text {
@@ -982,10 +984,19 @@ footer {
   margin: 0;
 }
 
-/* Remover texto em dispositivos móveis para melhorar o visual */
+/* Estilos para o texto dos botões em diferentes dispositivos */
+.btn-text {
+  transition: all 0.3s ease;
+}
+
+/* Em dispositivos móveis, esconder o texto por padrão */
 @media (max-width: 768px) {
   .btn-text {
     display: none;
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
   }
   
   .message-btn {
@@ -998,6 +1009,16 @@ footer {
     font-size: 20px;
     width: 20px;
     height: 20px;
+  }
+  
+  /* Mostrar texto quando o botão estiver ativo/focado */
+  .message-btn.active .btn-text,
+  .message-btn:focus .btn-text,
+  .message-btn:hover .btn-text {
+    display: inline;
+    opacity: 1;
+    width: auto;
+    margin-left: 8px;
   }
 }
 

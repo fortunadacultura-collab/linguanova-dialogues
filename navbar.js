@@ -91,6 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Disparar evento de mudança
                 const event = new Event('change');
                 document.getElementById('learning-language').dispatchEvent(event);
+                
+                // Atualizar a página com o novo idioma
+                if (window.updateUITexts) {
+                    window.updateUITexts(value);
+                }
             });
         });
     }
@@ -136,6 +141,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Disparar evento de mudança
                 const event = new Event('change');
                 document.getElementById('user-language').dispatchEvent(event);
+                
+                // Atualizar a página com o novo idioma
+                if (window.updateUITexts) {
+                    window.updateUITexts(value);
+                }
             });
         });
     }
@@ -179,4 +189,40 @@ function logout() {
     // In a real app, this would handle logout
     console.log('Logging out');
     alert('Funcionalidade de logout');
+}
+
+// Função para atualizar textos da UI
+function updateUITexts(langCode) {
+    const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
+    
+    document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[key]) {
+            element.textContent = translations[key];
+        }
+    });
+    
+    // Atualizar botões de tradução nos diálogos
+    updateDialogueButtons(langCode);
+}
+
+// Atualizar botões de tradução nos diálogos
+function updateDialogueButtons(langCode) {
+    const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
+    
+    document.querySelectorAll('.message-btn').forEach((button, index) => {
+        if (index % 2 === 0) {
+            // Botão de play/ouvir
+            const btnText = button.querySelector('.btn-text');
+            if (btnText) {
+                btnText.textContent = translations['Play'] || 'Ouvir';
+            }
+        } else {
+            // Botão de traduzir
+            const btnText = button.querySelector('.btn-text');
+            if (btnText) {
+                btnText.textContent = translations['Traduzir'] || 'Traduzir';
+            }
+        }
+    });
 }

@@ -38,18 +38,6 @@ const domElements = {
   levelName: document.querySelector('.level-name')
 };
 
-// Calculate how many themes fit per line based on screen size
-function calculateThemesPerLine() {
-  const grid = document.querySelector('.theme-grid');
-  if (!grid) return 4;
-  
-  const gridWidth = grid.offsetWidth;
-  const cardWidth = 280;
-  const gap = 32;
-  
-  return Math.max(1, Math.floor(gridWidth / (cardWidth + gap)));
-}
-
 // Initialize the application
 async function init() {
   try {
@@ -69,7 +57,7 @@ async function init() {
     await loadDialogue('morning_routine');
     renderThemeCards();
     setupEventListeners();
-    updateUITexts();
+    updateUITexts(appConfig.currentLanguage);
     
     // Setup mobile button behavior
     setupMobileButtonBehavior();
@@ -185,23 +173,20 @@ async function loadDialogue(dialogueId) {
     const actionsDiv = document.createElement('div');
     actionsDiv.className = 'message-actions';
     
-    // Modern play button
+    // Botão de play
     const playButton = document.createElement('button');
     playButton.className = 'message-btn play-btn';
-    playButton.setAttribute('aria-label', appConfig.data.translations[appConfig.currentLanguage]['Play'] || 'Play');
-    playButton.onclick = () => playPhrase(index);
     playButton.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="5 3 19 12 5 21 5 3"></polygon>
       </svg>
       <span class="btn-text">${appConfig.data.translations[appConfig.currentLanguage]['Play'] || 'Ouvir'}</span>
     `;
+    playButton.onclick = () => playPhrase(index);
     
-    // Modern translate button
+    // Botão de tradução
     const translateButton = document.createElement('button');
     translateButton.className = 'message-btn';
-    translateButton.setAttribute('aria-label', appConfig.data.translations[appConfig.currentLanguage]['Traduzir'] || 'Translate');
-    translateButton.onclick = (e) => toggleTranslation(e.currentTarget);
     translateButton.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
@@ -211,6 +196,9 @@ async function loadDialogue(dialogueId) {
       </svg>
       <span class="btn-text">${appConfig.data.translations[appConfig.currentLanguage]['Traduzir'] || 'Traduzir'}</span>
     `;
+    translateButton.onclick = function() {
+      toggleTranslation(this);
+    };
     
     actionsDiv.appendChild(playButton);
     actionsDiv.appendChild(translateButton);
@@ -234,7 +222,29 @@ async function loadDialogue(dialogueId) {
   preloadAudios();
   calculateDurations();
   stopDialogue();
-  renderThemeCards(); // Update theme cards to highlight current dialogue
+  renderThemeCards();
+}
+
+// Função para atualizar os botões de tradução
+function updateTranslationButtons(playButton, translateButton, langCode) {
+  const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
+  
+  playButton.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="5 3 19 12 5 21 5 3"></polygon>
+    </svg>
+    <span class="btn-text">${translations['Play'] || 'Ouvir'}</span>
+  `;
+  
+  translateButton.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+      <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+      <path d="M2 2l7.586 7.586"></path>
+      <circle cx="11" cy="11" r="2"></circle>
+    </svg>
+    <span class="btn-text">${translations['Traduzir'] || 'Traduzir'}</span>
+  `;
 }
 
 async function loadDialogueTxt(dialogueId) {
@@ -282,6 +292,9 @@ async function parseDialogueTxt(content) {
     }
     else if (trimmedLine.startsWith(txtFormat.translationPrefixes.es)) {
       currentLine.translations.es = trimmedLine.replace(txtFormat.translationPrefixes.es, '').trim();
+    }
+    else if (trimmedLine.startsWith(txtFormat.translationPrefixes.en)) {
+      currentLine.translations.en = trimmedLine.replace(txtFormat.translationPrefixes.en, '').trim();
     }
   }
   
@@ -526,48 +539,38 @@ function updatePlayerControls() {
 
 function toggleTranslation(button) {
   const messageElement = button.parentElement.parentElement;
-  const translation = messageElement.querySelector(`.translation-text[data-lang="${appConfig.currentLanguage}"]`);
+  const translation = messageElement.querySelector('.translation-text');
   
-  if (translation.style.display === 'block') {
+  // Obter o idioma atual do texto de tradução
+  const translationLang = translation.getAttribute('data-lang') || appConfig.currentLanguage;
+  const translations = appConfig.data.translations[translationLang] || appConfig.data.translations['pt'];
+  
+  // Verificar se a tradução está visível
+  const isTranslationVisible = translation.style.display === 'block';
+  
+  if (isTranslationVisible) {
+    // Se a tradução está visível, ocultá-la
     translation.style.display = 'none';
-    button.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-        <path d="M2 2l7.586 7.586"></path>
-        <circle cx="11" cy="11" r="2"></circle>
-      </svg>
-      <span class="btn-text">${appConfig.data.translations[appConfig.currentLanguage]['Traduzir'] || 'Traduzir'}</span>
-    `;
+    updateTranslateButtonText(button, translations['Traduzir'] || 'Traduzir');
   } else {
+    // Se a tradução está oculta, mostrá-la e ocultar outras
     document.querySelectorAll('.translation-text').forEach(el => {
       el.style.display = 'none';
-    });
-    
-    document.querySelectorAll('.message-btn').forEach((btn, index) => {
-      if (index % 2 !== 0) {
-        btn.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-            <path d="M2 2l7.586 7.586"></path>
-            <circle cx="11" cy="11" r="2"></circle>
-          </svg>
-          <span class="btn-text">${appConfig.data.translations[appConfig.currentLanguage]['Traduzir'] || 'Traduzir'}</span>
-        `;
+      
+      // Atualizar os botões correspondentes para "Traduzir"
+      const btn = el.parentElement.querySelector('.message-actions .message-btn:nth-child(2)');
+      if (btn && btn !== button) {
+        const btnLang = el.getAttribute('data-lang') || appConfig.currentLanguage;
+        const btnTranslations = appConfig.data.translations[btnLang] || appConfig.data.translations['pt'];
+        updateTranslateButtonText(btn, btnTranslations['Traduzir'] || 'Traduzir');
       }
     });
     
+    // Mostrar a tradução atual
     translation.style.display = 'block';
-    button.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
-        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
-        <path d="M2 2l7.586 7.586"></path>
-        <circle cx="11" cy="11" r="2"></circle>
-      </svg>
-      <span class="btn-text">${appConfig.data.translations[appConfig.currentLanguage]['Ocultar'] || 'Ocultar'}</span>
-    `;
+    updateTranslateButtonText(button, translations['Ocultar'] || 'Ocultar');
+    
+    // Rolagem suave para a mensagem
     messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
   
@@ -576,6 +579,49 @@ function toggleTranslation(button) {
     const btnText = button.querySelector('.btn-text');
     if (btnText) {
       btnText.style.display = 'none';
+    }
+  }
+}
+
+// Função auxiliar para atualizar apenas o texto do botão
+function updateTranslateButtonText(button, text) {
+  const btnText = button.querySelector('.btn-text');
+  if (btnText) {
+    btnText.textContent = text;
+  } else {
+    // Se não existe span de texto, criar um
+    const newText = document.createElement('span');
+    newText.className = 'btn-text';
+    newText.textContent = text;
+    
+    // Manter o ícone SVG e adicionar o novo texto
+    const svgIcon = button.querySelector('svg');
+    if (svgIcon) {
+      // Salvar o evento atual antes de modificar o HTML
+      const originalOnclick = button.onclick;
+      
+      button.innerHTML = '';
+      button.appendChild(svgIcon.cloneNode(true));
+      button.appendChild(newText);
+      
+      // Restaurar o evento
+      button.onclick = originalOnclick;
+    } else {
+      // Salvar o evento atual antes de modificar o HTML
+      const originalOnclick = button.onclick;
+      
+      button.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
+          <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
+          <path d="M2 2l7.586 7.586"></path>
+          <circle cx="11" cy="11" r="2"></circle>
+        </svg>
+        <span class="btn-text">${text}</span>
+      `;
+      
+      // Restaurar o evento
+      button.onclick = originalOnclick;
     }
   }
 }
@@ -643,7 +689,7 @@ function setupEventListeners() {
     btn.addEventListener('click', () => {
       appConfig.currentLanguage = btn.dataset.lang;
       updateActiveLanguageButton();
-      updateUITexts();
+      updateUITexts(appConfig.currentLanguage);
       loadDialogue(appConfig.currentDialogue);
     });
   });
@@ -713,59 +759,109 @@ function setupEventListeners() {
   });
 }
 
+function calculateThemesPerLine() {
+  const grid = document.querySelector('.theme-grid');
+  if (!grid) return 4;
+  
+  const gridWidth = grid.offsetWidth;
+  const cardWidth = 280;
+  const gap = 32;
+  
+  return Math.max(1, Math.floor(gridWidth / (cardWidth + gap)));
+}
+
 function updateActiveLanguageButton() {
   domElements.langButtons.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === appConfig.currentLanguage);
   });
 }
 
-function updateUITexts() {
-  if (domElements.mainTitle) {
-    domElements.mainTitle.textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["Diálogos"] || 
-      "Diálogos";
-  }
+function updateUITexts(langCode) {
+  // Atualizar o idioma atual na configuração
+  appConfig.currentLanguage = langCode;
   
-  if (domElements.subtitle) {
-    domElements.subtitle.textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["Aprenda diálogos reais em inglês americano sobre os tópicos most relevantes"] || 
-      "Aprenda diálogos reais em inglês americano sobre os tópicos mais relevantes";
-  }
+  const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
   
-  if (domElements.chooseThemeText) {
-    domElements.chooseThemeText.textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["Escolha Seu Próximo Tema"] || 
-      "Escolha Seu Próximo Tema";
-  }
+  document.querySelectorAll('[data-translate]').forEach(element => {
+    const key = element.getAttribute('data-translate');
+    if (translations[key]) {
+      element.textContent = translations[key];
+    }
+  });
   
-  if (domElements.startLearningText) {
-    domElements.startLearningText.textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["Comece a Aprender Agora"] || 
-      "Comece a Aprender Agora";
-  }
+  // Atualizar botões de tradução nos diálogos
+  updateDialogueButtons(langCode);
   
-  if (domElements.studyLabels && domElements.studyLabels.length >= 2) {
-    domElements.studyLabels[0].textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["IDIOMA EM ESTUDO:"] || 
-      "IDIOMA EM ESTUDO:";
-    domElements.studyLabels[1].textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["NÍVEL:"] || 
-      "NÍVEL:";
-  }
-  
-  if (domElements.targetLanguage) {
-    domElements.targetLanguage.textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["INGLÊS AMERICANO"] || 
-      "INGLÊS AMERICANO";
-  }
-  
-  if (domElements.levelName) {
-    domElements.levelName.textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["INTERMEDIÁRIO (B1-B2)"] || 
-      "INTERMEDIÁRIO (B1-B2)";
-  }
-  
+  // Atualizar botões de carregar mais/menos temas
   updateThemeControls();
+  
+  // Atualizar traduções dos diálogos
+  updateDialogueTranslations(langCode);
+}
+
+// Atualizar botões de tradução nos diálogos
+function updateDialogueButtons(langCode) {
+  const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
+  
+  document.querySelectorAll('.message').forEach((messageElement, index) => {
+    const playButton = messageElement.querySelector('.message-actions .message-btn.play-btn');
+    const translationDiv = messageElement.querySelector('.translation-text');
+    const translateButton = messageElement.querySelector('.message-actions .message-btn:not(.play-btn)');
+    
+    // Atualizar botão de play/ouvir
+    if (playButton) {
+      updateTranslateButtonText(playButton, translations['Play'] || 'Ouvir');
+      
+      // Reaplicar o evento de clique
+      playButton.onclick = () => playPhrase(index);
+    }
+    
+    // Atualizar botão de traduzir
+    if (translationDiv && translateButton) {
+      const isVisible = translationDiv.style.display === 'block';
+      
+      if (isVisible) {
+        updateTranslateButtonText(translateButton, translations['Ocultar'] || 'Ocultar');
+      } else {
+        updateTranslateButtonText(translateButton, translations['Traduzir'] || 'Traduzir');
+      }
+      
+      // Reaplicar o evento de clique
+      translateButton.onclick = function() {
+        toggleTranslation(this);
+      };
+    }
+  });
+}
+
+// Atualizar traduções dos diálogos
+function updateDialogueTranslations(langCode) {
+  const dialogue = appConfig.dialogues[appConfig.currentDialogue];
+  if (!dialogue) return;
+  
+  const messageElements = document.querySelectorAll('.message');
+  messageElements.forEach((messageElement, index) => {
+    if (dialogue.lines[index] && dialogue.lines[index].translations[langCode]) {
+      const translationDiv = messageElement.querySelector('.translation-text');
+      if (translationDiv) {
+        translationDiv.textContent = dialogue.lines[index].translations[langCode];
+        translationDiv.setAttribute('data-lang', langCode);
+        
+        // Atualizar também o botão correspondente
+        const translateButton = messageElement.querySelector('.message-actions .message-btn:nth-child(2)');
+        if (translateButton) {
+          const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
+          const isVisible = translationDiv.style.display === 'block';
+          
+          if (isVisible) {
+            updateTranslateButtonText(translateButton, translations['Ocultar'] || 'Ocultar');
+          } else {
+            updateTranslateButtonText(translateButton, translations['Traduzir'] || 'Traduzir');
+          }
+        }
+      }
+    }
+  });
 }
 
 function updateThemeControls() {
@@ -774,10 +870,19 @@ function updateThemeControls() {
     
     if (!loadMoreBtn || !showLessBtn) return;
     
-    loadMoreBtn.querySelector('span').textContent = 
-        appConfig.data.translations[appConfig.currentLanguage]['load_more'] || 'Carregar Mais';
-    showLessBtn.querySelector('span').textContent = 
-        appConfig.data.translations[appConfig.currentLanguage]['show_less'] || 'Mostrar Menos';
+    const translations = appConfig.data.translations[appConfig.currentLanguage] || appConfig.data.translations['pt'];
+    
+    // Atualizar textos dos botões
+    const loadMoreText = loadMoreBtn.querySelector('span');
+    const showLessText = showLessBtn.querySelector('span');
+    
+    if (loadMoreText) {
+        loadMoreText.textContent = translations['load_more'] || 'Carregar Mais Temas';
+    }
+    
+    if (showLessText) {
+        showLessText.textContent = translations['show_less'] || 'Mostrar Menos';
+    }
     
     if (appConfig.visibleThemes >= appConfig.data.themes.length) {
         loadMoreBtn.style.display = 'none';
@@ -867,3 +972,4 @@ document.addEventListener('DOMContentLoaded', () => {
 window.toggleTranslation = toggleTranslation;
 window.loadDialogue = loadDialogue;
 window.playPhrase = playPhrase;
+window.updateUITexts = updateUITexts;

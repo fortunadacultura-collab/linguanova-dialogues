@@ -19,42 +19,42 @@
         </div>
         
         <div class="nav-links" id="nav-links">
-            <a href="index.html">Home</a>
-            <a href="#" class="active">Diálogos</a>
-            <a href="#">Histórias</a>
+            <a href="index.html" data-translate="navHome">Home</a>
+            <a href="#" class="active" data-translate="navDialogues">Diálogos</a>
+            <a href="#" data-translate="navStories">Histórias</a>
             
             <!-- Dropdown para Flashcards -->
             <div class="dropdown">
                 <div class="dropdown-toggle">
-                    <span>Flashcards</span>
+                    <span data-translate="navFlashcards">Flashcards</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="dropdown-menu">
                     <a href="flashcards.html" class="dropdown-item">
                         <i class="fas fa-layer-group"></i>
-                        <span>Meus Decks</span>
+                        <span data-translate="navMyDecks">Meus Decks</span>
                     </a>
                     <a href="community.html" class="dropdown-item">
                         <i class="fas fa-users"></i>
-                        <span>Comunidade</span>
+                        <span data-translate="navCommunity">Comunidade</span>
                     </a>
                     <a href="create-deck.html" class="dropdown-item">
                         <i class="fas fa-plus"></i>
-                        <span>Criar Deck</span>
+                        <span data-translate="navCreateDeck">Criar Deck</span>
                     </a>
                     <a href="#" class="dropdown-item">
                         <i class="fas fa-history"></i>
-                        <span>Estatísticas</span>
+                        <span data-translate="navStatistics">Estatísticas</span>
                     </a>
                 </div>
             </div>
             
-            <a href="community.html">Comunidade</a>
+            <a href="community.html" data-translate="navCommunity">Comunidade</a>
         </div>
         
         <div class="nav-actions">
             <div class="language-section">
-                <span class="learning-label">Aprendendo:</span>
+                <span class="learning-label" data-translate="learningLabel">Aprendendo:</span>
                 
                 <div class="language-selector-wrapper">
                     <div class="language-selector">
@@ -114,7 +114,7 @@
             </div>
             
             <div class="user-language-section">
-                <span class="user-language-label">Meu idioma:</span>
+                <span class="user-language-label" data-translate="userLanguageLabel">Meu idioma:</span>
                 <div class="language-selector-wrapper">
                     <div class="language-selector">
                         <div class="selected-language" id="user-language">
@@ -174,12 +174,12 @@
             
             <div class="user-menu">
                 <div class="user-avatar">U</div>
-                <span class="user-name">Usuário</span>
+                <span class="user-name" data-translate="userName">Usuário</span>
             </div>
             
             <button class="btn btn-outline logout-btn" onclick="logout()">
                 <i class="fas fa-sign-out-alt"></i>
-                <span class="logout-text">Sair</span>
+                <span class="logout-text" data-translate="logoutButton">Sair</span>
             </button>
         </div>
         
@@ -193,7 +193,7 @@
     <div class="content-below-navbar">
         <!-- Page title added here -->
         <div class="page-title-container">
-            <h1 class="page-title">Dialogues</h1>
+            <h1 class="page-title" data-translate="pageTitle">Dialogues</h1>
         </div>
         
         <div class="container">
@@ -230,7 +230,7 @@
                 </div>
             </div>
 
-            <h2 class="section-title" id="choose-theme-text">Escolha Seu Próximo Tema:</h2>
+            <h2 class="section-title" id="choose-theme-text" data-translate="chooseTheme">Escolha Seu Próximo Tema:</h2>
             
             <div class="theme-grid" id="theme-container">
                 <!-- Theme cards will be inserted by JavaScript -->
@@ -239,16 +239,16 @@
             <div class="theme-controls">
                 <button id="load-more-btn" class="theme-control-btn">
                     <i class="fas fa-chevron-down"></i>
-                    <span>Carregar Mais Temas</span>
+                    <span data-translate="loadMore">Carregar Mais Temas</span>
                 </button>
                 <button id="show-less-btn" class="theme-control-btn" style="display: none;">
                     <i class="fas fa-chevron-up"></i>
-                    <span>Mostrar Menos</span>
+                    <span data-translate="showLess">Mostrar Menos</span>
                 </button>
             </div>
 
             <div class="text-center">
-                <a href="#signup" class="cta-button" id="start-learning-text">Comece a Aprender Agora!</a>
+                <a href="#signup" class="cta-button" id="start-learning-text" data-translate="startLearning">Comece a Aprender Agora!</a>
             </div>
         </div>
     </div>

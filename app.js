@@ -70,6 +70,9 @@ async function init() {
     renderThemeCards();
     setupEventListeners();
     updateUITexts();
+    
+    // Setup mobile button behavior
+    setupMobileButtonBehavior();
   } catch (error) {
     console.error('Initialization error:', error);
     showErrorToUser('initialization');
@@ -101,6 +104,66 @@ function setModernIcons() {
         <rect x="4" y="4" width="16" height="16"></rect>
       </svg>
     `;
+  }
+}
+
+// Setup mobile button behavior
+function setupMobileButtonBehavior() {
+  // Adicionar eventos aos botões de mensagem
+  const messageButtons = document.querySelectorAll('.message-btn');
+  
+  messageButtons.forEach(button => {
+    // Adicionar classe active no toque
+    button.addEventListener('touchstart', function() {
+      this.classList.add('active');
+    });
+    
+    // Remover classe active quando o toque terminar
+    button.addEventListener('touchend', function() {
+      // Manter ativo por mais tempo para melhor UX
+      setTimeout(() => {
+        this.classList.remove('active');
+      }, 1000);
+    });
+    
+    // Também funciona com hover para dispositivos com mouse
+    button.addEventListener('mouseenter', function() {
+      this.classList.add('active');
+    });
+    
+    button.addEventListener('mouseleave', function() {
+      this.classList.remove('active');
+    });
+  });
+  
+  // Detectar dispositivo e ajustar comportamento
+  function detectMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+  }
+  
+  if (detectMobileDevice()) {
+    document.body.classList.add('mobile-device');
+    
+    // Ajustes específicos para dispositivos móveis
+    const style = document.createElement('style');
+    style.textContent = `
+      .message-btn .btn-text {
+        display: none !important;
+      }
+      
+      .message-btn.active .btn-text,
+      .message-btn:focus .btn-text {
+        display: inline !important;
+        margin-left: 8px;
+        animation: fadeIn 0.3s ease;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
   }
 }
 
@@ -666,7 +729,7 @@ function updateUITexts() {
   
   if (domElements.subtitle) {
     domElements.subtitle.textContent = 
-      appConfig.data.translations[appConfig.currentLanguage]["Aprenda diálogos reais em inglês americano sobre os tópicos mais relevantes"] || 
+      appConfig.data.translations[appConfig.currentLanguage]["Aprenda diálogos reais em inglês americano sobre os tópicos most relevantes"] || 
       "Aprenda diálogos reais em inglês americano sobre os tópicos mais relevantes";
   }
   

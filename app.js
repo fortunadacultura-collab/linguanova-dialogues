@@ -109,62 +109,33 @@ function setModernIcons() {
 
 // Setup mobile button behavior
 function setupMobileButtonBehavior() {
-  // Adicionar eventos aos botões de mensagem
-  const messageButtons = document.querySelectorAll('.message-btn');
+  // Check if we're on a mobile device
+  const isMobile = window.innerWidth <= 768;
   
+  // Hide button text on mobile
+  if (isMobile) {
+    const messageButtons = document.querySelectorAll('.message-btn');
+    messageButtons.forEach(button => {
+      const btnText = button.querySelector('.btn-text');
+      if (btnText) {
+        btnText.style.display = 'none';
+      }
+    });
+  }
+  
+  // Add touch events for mobile
+  const messageButtons = document.querySelectorAll('.message-btn');
   messageButtons.forEach(button => {
-    // Adicionar classe active no toque
     button.addEventListener('touchstart', function() {
       this.classList.add('active');
     });
     
-    // Remover classe active quando o toque terminar
     button.addEventListener('touchend', function() {
-      // Manter ativo por mais tempo para melhor UX
       setTimeout(() => {
         this.classList.remove('active');
-      }, 1000);
-    });
-    
-    // Também funciona com hover para dispositivos com mouse
-    button.addEventListener('mouseenter', function() {
-      this.classList.add('active');
-    });
-    
-    button.addEventListener('mouseleave', function() {
-      this.classList.remove('active');
+      }, 300);
     });
   });
-  
-  // Detectar dispositivo e ajustar comportamento
-  function detectMobileDevice() {
-    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-  }
-  
-  if (detectMobileDevice()) {
-    document.body.classList.add('mobile-device');
-    
-    // Ajustes específicos para dispositivos móveis
-    const style = document.createElement('style');
-    style.textContent = `
-      .message-btn .btn-text {
-        display: none !important;
-      }
-      
-      .message-btn.active .btn-text,
-      .message-btn:focus .btn-text {
-        display: inline !important;
-        margin-left: 8px;
-        animation: fadeIn 0.3s ease;
-      }
-      
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-    `;
-    document.head.appendChild(style);
-  }
 }
 
 // Dialogue functions
@@ -251,6 +222,14 @@ async function loadDialogue(dialogueId) {
     
     domElements.dialogueContent.appendChild(messageDiv);
   });
+
+  // Hide button text on mobile after rendering
+  if (window.innerWidth <= 768) {
+    const btnTexts = document.querySelectorAll('.btn-text');
+    btnTexts.forEach(text => {
+      text.style.display = 'none';
+    });
+  }
 
   preloadAudios();
   calculateDurations();
@@ -558,7 +537,7 @@ function toggleTranslation(button) {
         <path d="M2 2l7.586 7.586"></path>
         <circle cx="11" cy="11" r="2"></circle>
       </svg>
-      ${appConfig.data.translations[appConfig.currentLanguage]['Traduzir']}
+      <span class="btn-text">${appConfig.data.translations[appConfig.currentLanguage]['Traduzir'] || 'Traduzir'}</span>
     `;
   } else {
     document.querySelectorAll('.translation-text').forEach(el => {
@@ -574,7 +553,7 @@ function toggleTranslation(button) {
             <path d="M2 2l7.586 7.586"></path>
             <circle cx="11" cy="11" r="2"></circle>
           </svg>
-          ${appConfig.data.translations[appConfig.currentLanguage]['Traduzir']}
+          <span class="btn-text">${appConfig.data.translations[appConfig.currentLanguage]['Traduzir'] || 'Traduzir'}</span>
         `;
       }
     });
@@ -587,9 +566,17 @@ function toggleTranslation(button) {
         <path d="M2 2l7.586 7.586"></path>
         <circle cx="11" cy="11" r="2"></circle>
       </svg>
-      ${appConfig.data.translations[appConfig.currentLanguage]['Ocultar']}
+      <span class="btn-text">${appConfig.data.translations[appConfig.currentLanguage]['Ocultar'] || 'Ocultar'}</span>
     `;
     messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  
+  // Hide button text on mobile after toggle
+  if (window.innerWidth <= 768) {
+    const btnText = button.querySelector('.btn-text');
+    if (btnText) {
+      btnText.style.display = 'none';
+    }
   }
 }
 
@@ -711,6 +698,18 @@ function setupEventListeners() {
       appConfig.visibleThemes = appConfig.themesPerLine * appConfig.currentLine;
       renderThemeCards();
     }
+    
+    // Update button text visibility on resize
+    const btnTexts = document.querySelectorAll('.btn-text');
+    if (window.innerWidth <= 768) {
+      btnTexts.forEach(text => {
+        text.style.display = 'none';
+      });
+    } else {
+      btnTexts.forEach(text => {
+        text.style.display = 'inline';
+      });
+    }
   });
 }
 
@@ -776,9 +775,9 @@ function updateThemeControls() {
     if (!loadMoreBtn || !showLessBtn) return;
     
     loadMoreBtn.querySelector('span').textContent = 
-        appConfig.data.translations[appConfig.currentLanguage]['load_more'];
+        appConfig.data.translations[appConfig.currentLanguage]['load_more'] || 'Carregar Mais';
     showLessBtn.querySelector('span').textContent = 
-        appConfig.data.translations[appConfig.currentLanguage]['show_less'];
+        appConfig.data.translations[appConfig.currentLanguage]['show_less'] || 'Mostrar Menos';
     
     if (appConfig.visibleThemes >= appConfig.data.themes.length) {
         loadMoreBtn.style.display = 'none';

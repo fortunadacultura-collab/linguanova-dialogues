@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     selector.classList.remove('active');
                 }
             });
+            
+            // Fechar dropdowns abertos
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                if (dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                }
+            });
         });
         
         // Close menu when clicking on links
@@ -39,16 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Toggle dropdown menus on mobile
-    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-            if (window.innerWidth <= 900) {
-                e.preventDefault();
-                const dropdown = this.parentElement;
-                dropdown.classList.toggle('active');
-            }
-        });
-    });
+    // Inicializar dropdowns
+    initDropdowns();
     
     // Seletor de idiomas para Learning
     const learningLanguageSelector = document.querySelector('#learning-language').closest('.language-selector');
@@ -66,6 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (userLanguageSelector && userLanguageSelector.classList.contains('active')) {
                 userLanguageSelector.classList.remove('active');
             }
+            
+            // Fechar dropdowns abertos
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                if (dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                }
+            });
         });
         
         // Selecionar um idioma
@@ -116,6 +122,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (learningLanguageSelector && learningLanguageSelector.classList.contains('active')) {
                 learningLanguageSelector.classList.remove('active');
             }
+            
+            // Fechar dropdowns abertos
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                if (dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                }
+            });
         });
         
         // Selecionar um idioma
@@ -159,12 +172,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Fechar dropdowns ao clicar fora
-        document.querySelectorAll('.dropdown').forEach(dropdown => {
-            if (!event.target.closest('.dropdown') && dropdown.classList.contains('active')) {
-                dropdown.classList.remove('active');
-            }
-        });
+        // Fechar dropdowns ao clicar fora (apenas para desktop)
+        if (window.innerWidth > 900) {
+            document.querySelectorAll('.dropdown').forEach(dropdown => {
+                if (!event.target.closest('.dropdown') && dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        }
     });
     
     // Prevenir que o clique nos menus propague para o documento
@@ -184,6 +199,81 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Função para inicializar os dropdowns - CORRIGIDA
+function initDropdowns() {
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+        const dropdown = toggle.parentElement;
+        
+        // Comportamento para desktop (hover)
+        toggle.addEventListener('mouseenter', function() {
+            if (window.innerWidth > 900) {
+                closeAllDropdowns();
+                dropdown.classList.add('active');
+            }
+        });
+        
+        // Manter dropdown aberto quando o mouse está sobre ele
+        dropdown.addEventListener('mouseenter', function() {
+            if (window.innerWidth > 900) {
+                this.classList.add('active');
+            }
+        });
+        
+        // Fechar dropdown quando o mouse sai
+        dropdown.addEventListener('mouseleave', function() {
+            if (window.innerWidth > 900) {
+                this.classList.remove('active');
+            }
+        });
+        
+        // Comportamento para mobile (click)
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 900) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Fechar todos os outros dropdowns
+                closeAllDropdownsExcept(dropdown);
+                
+                // Alternar o dropdown atual
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+    
+    // Fechar dropdowns ao clicar fora deles
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.dropdown')) {
+            closeAllDropdowns();
+        }
+    });
+    
+    // Fechar dropdowns ao tocar fora (mobile)
+    document.addEventListener('touchstart', function(event) {
+        if (!event.target.closest('.dropdown')) {
+            closeAllDropdowns();
+        }
+    });
+}
+
+// Função para fechar todos os dropdowns
+function closeAllDropdowns() {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        dropdown.classList.remove('active');
+    });
+}
+
+// Função para fechar todos os dropdowns exceto um específico
+function closeAllDropdownsExcept(exceptDropdown) {
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+        if (dropdown !== exceptDropdown) {
+            dropdown.classList.remove('active');
+        }
+    });
+}
+
 // Logout function
 function logout() {
     // In a real app, this would handle logout
@@ -191,38 +281,78 @@ function logout() {
     alert('Funcionalidade de logout');
 }
 
-// Função para atualizar textos da UI
-function updateUITexts(langCode) {
-    const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
-    
+// Função para atualizar textos da UI (APENAS NAVBAR)
+function updateNavbarTexts(langCode) {
+    // Verificar se o appConfig existe e tem traduções
+    const translations = window.appConfig && window.appConfig.data && window.appConfig.data.translations 
+        ? window.appConfig.data.translations[langCode] || window.appConfig.data.translations['pt']
+        : {};
+
+    // Atualizar apenas os textos específicos da navbar
     document.querySelectorAll('[data-translate]').forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[key]) {
             element.textContent = translations[key];
         }
     });
-    
-    // Atualizar botões de tradução nos diálogos
-    updateDialogueButtons(langCode);
 }
 
-// Atualizar botões de tradução nos diálogos
+// Atualizar botões de tradução nos diálogos (função auxiliar para navbar)
 function updateDialogueButtons(langCode) {
-    const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
+    // Verificar se o appConfig existe e tem traduções
+    const translations = window.appConfig && window.appConfig.data && window.appConfig.data.translations 
+        ? window.appConfig.data.translations[langCode] || window.appConfig.data.translations['pt']
+        : {};
     
     document.querySelectorAll('.message-btn').forEach((button, index) => {
         if (index % 2 === 0) {
             // Botão de play/ouvir
             const btnText = button.querySelector('.btn-text');
-            if (btnText) {
-                btnText.textContent = translations['Play'] || 'Ouvir';
+            if (btnText && translations['Play']) {
+                btnText.textContent = translations['Play'];
             }
         } else {
             // Botão de traduzir
             const btnText = button.querySelector('.btn-text');
-            if (btnText) {
-                btnText.textContent = translations['Traduzir'] || 'Traduzir';
+            if (btnText && translations['Traduzir']) {
+                btnText.textContent = translations['Traduzir'];
             }
         }
     });
 }
+
+// Adicionar função global para atualizar UI (se não existir)
+if (typeof window.updateUITexts === 'undefined') {
+    window.updateUITexts = function(langCode) {
+        // Esta função será sobrescrita pelo app.js, mas serve como fallback
+        updateNavbarTexts(langCode);
+    };
+}
+
+// Debug function para verificar se o dropdown está funcionando
+function debugDropdowns() {
+    console.log('=== DEBUG DROPDOWNS ===');
+    
+    const dropdowns = document.querySelectorAll('.dropdown');
+    console.log(`Número de dropdowns encontrados: ${dropdowns.length}`);
+    
+    dropdowns.forEach((dropdown, index) => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        
+        console.log(`Dropdown ${index}:`);
+        console.log(' - Elemento:', dropdown);
+        console.log(' - Toggle:', toggle);
+        console.log(' - Menu:', menu);
+        console.log(' - Menu visível:', menu ? window.getComputedStyle(menu).display : 'N/A');
+        console.log(' - Classe active:', dropdown.classList.contains('active'));
+        console.log('---');
+    });
+}
+
+// Inicializar debug (opcional - remover em produção)
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        debugDropdowns();
+    }, 1000);
+});

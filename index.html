@@ -54,7 +54,8 @@
         
         <div class="nav-actions">
             <div class="language-section">
-                <span class="learning-label" data-translate="learningLabel">Aprendendo:</span>
+                <!-- Ícone substituindo o texto "Aprendendo:" -->
+                <i class="fas fa-graduation-cap nav-icon" title="Aprendendo"></i>
                 
                 <div class="language-selector-wrapper">
                     <div class="language-selector">
@@ -114,7 +115,8 @@
             </div>
             
             <div class="user-language-section">
-                <span class="user-language-label" data-translate="userLanguageLabel">Meu idioma:</span>
+                <!-- Ícone substituindo o texto "Meu idioma:" -->
+                <i class="fas fa-globe-americas nav-icon" title="Meu idioma"></i>
                 <div class="language-selector-wrapper">
                     <div class="language-selector">
                         <div class="selected-language" id="user-language">
@@ -173,13 +175,13 @@
             </div>
             
             <div class="user-menu">
+                <!-- Apenas o ícone do usuário (sem texto) -->
                 <div class="user-avatar">U</div>
-                <span class="user-name" data-translate="userName">Usuário</span>
             </div>
             
-            <button class="btn btn-outline logout-btn" onclick="logout()">
+            <!-- Botão Sair apenas com ícone e sem bordas -->
+            <button class="btn-icon logout-btn" onclick="logout()" title="Sair">
                 <i class="fas fa-sign-out-alt"></i>
-                <span class="logout-text" data-translate="logoutButton">Sair</span>
             </button>
         </div>
         

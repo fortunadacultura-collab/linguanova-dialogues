@@ -36,12 +36,12 @@ body {
   flex-direction: column;
 }
 
-/* Navbar Styles */
+/* Navbar Styles - AJUSTES PRINCIPAIS */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%;
+  padding: 0.8rem 3%;
   background-color: white;
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
   position: fixed;
@@ -69,9 +69,13 @@ body {
   color: var(--accent);
 }
 
+.logo .logo-text {
+  display: inline;
+}
+
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: center;
   transition: all 0.3s ease;
   flex-shrink: 1;
@@ -88,6 +92,7 @@ body {
   white-space: nowrap;
   flex-shrink: 0;
   font-family: 'Poppins', sans-serif; /* Padronização da fonte */
+  font-size: 0.95rem;
 }
 
 .nav-links a:hover {
@@ -129,6 +134,7 @@ body {
   color: var(--text);
   position: relative;
   font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
 }
 
 .dropdown-toggle:hover {
@@ -196,62 +202,71 @@ body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-shrink: 0;
   font-family: 'Poppins', sans-serif; /* Padronização da fonte */
 }
 
-.language-section {
+/* Estilos para os seletores de idioma com ícones */
+.language-icon-selector {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  flex-shrink: 0;
   position: relative;
 }
 
-.user-language-section {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  flex-shrink: 0;
+.icon-tooltip {
   position: relative;
-}
-
-.user-language-label {
-  font-weight: 500;
-  color: var(--text-light);
-  white-space: nowrap;
-  font-family: 'Poppins', sans-serif; /* Padronização da fonte */
-}
-
-.learning-label {
-  font-weight: 500;
-  color: var(--text-light);
-  white-space: nowrap;
-  font-family: 'Poppins', sans-serif; /* Padronização da fonte */
-}
-
-.language-display {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background: rgba(67, 97, 238, 0.1);
-  padding: 0.5rem 0.8rem;
-  border-radius: 8px;
-  white-space: nowrap;
-  flex-shrink: 0;
+  margin-right: 0.5rem;
+  color: var(--text-light);
+  font-size: 1.1rem;
 }
 
-.language-flag {
-  width: 20px;
-  height: 15px;
-  object-fit: cover;
-  border-radius: 2px;
+.icon-tooltip:hover {
+  color: var(--primary);
+}
+
+.icon-tooltip .tooltip-text {
+  visibility: hidden;
+  width: max-content;
+  background-color: var(--dark);
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8rem;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.icon-tooltip .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--dark) transparent transparent transparent;
+}
+
+.icon-tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Novo design do seletor de idiomas */
 .language-selector-wrapper {
   position: relative;
+  width: 50px;
 }
 
 .language-selector {
@@ -262,14 +277,14 @@ body {
 .selected-language {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.8rem;
+  gap: 0.3rem;
+  padding: 0.4rem 0.6rem;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
   background: white;
   transition: all 0.3s ease;
-  min-width: 100px;
-  justify-content: space-between;
+  min-width: auto;
+  justify-content: center;
 }
 
 .selected-language:hover {
@@ -288,10 +303,11 @@ body {
   font-weight: 500;
   flex-grow: 1;
   font-family: 'Poppins', sans-serif; /* Padronização da fonte */
+  display: none;
 }
 
 .selected-language i {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   transition: transform 0.3s ease;
   color: var(--text-light);
 }
@@ -303,8 +319,8 @@ body {
 .language-options {
   position: absolute;
   top: 100%;
-  left: 0;
-  width: 100%;
+  left: -45px;
+  width: 140px;
   background: white;
   border-radius: 8px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -350,12 +366,16 @@ body {
   border-radius: 2px;
 }
 
+.language-options li span {
+  display: inline-block;
+}
+
 .user-menu {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   cursor: pointer;
   flex-shrink: 0;
+  padding: 0.2rem;
 }
 
 .user-avatar {
@@ -373,6 +393,7 @@ body {
 .user-name {
   white-space: nowrap;
   font-family: 'Poppins', sans-serif; /* Padronização da fonte */
+  display: none;
 }
 
 .btn {
@@ -401,8 +422,16 @@ body {
   color: white;
 }
 
+.btn-icon {
+  padding: 0.5rem;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+}
+
 .logout-text {
   white-space: nowrap;
+  display: none;
 }
 
 /* Mobile menu toggle (three dots) */
@@ -440,7 +469,7 @@ body {
 
 /* Content below navbar */
 .content-below-navbar {
-  padding-top: 100px;
+  padding-top: 90px;
   padding-bottom: 2rem;
 }
 
@@ -1079,52 +1108,37 @@ footer {
   }
 }
 
-/* Responsividade para o navbar */
-@media (max-width: 1100px) {
-  .nav-links {
-    gap: 1rem;
-  }
-  
-  .learning-label, .user-language-label {
-    display: none;
-  }
-}
+/* ============================================
+   RESPONSIVIDADE PARA O NAVBAR
+   ============================================ */
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
   .nav-links {
     gap: 0.8rem;
   }
   
-  .language-display span {
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .logo .logo-text {
     display: none;
   }
   
-  .language-display {
-    padding: 0.5rem;
-  }
-  
-  .selected-language span {
+  .language-icon-selector .icon-tooltip {
     display: none;
   }
   
-  .selected-language {
-    min-width: auto;
-    padding: 0.5rem;
-  }
-  
-  .language-options li span {
-    display: none;
-  }
-  
-  .language-options {
-    min-width: 60px;
+  .language-selector-wrapper {
+    margin-right: 0;
   }
 }
 
 @media (max-width: 900px) {
   .navbar {
-      padding: 1rem;
-      flex-wrap: nowrap;
+      padding: 0.8rem 1rem;
   }
   
   .nav-links {
@@ -1138,7 +1152,7 @@ footer {
       flex-direction: column;
       justify-content: flex-start;
       padding-top: 80px;
-      gap: 2rem;
+      gap: 1.5rem;
       box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
       transition: right 0.3s ease;
       z-index: 1000;
@@ -1175,16 +1189,8 @@ footer {
   
   .nav-actions {
       margin-left: auto;
-      margin-right: 1rem;
-      gap: 1rem;
-  }
-  
-  .learning-label, .user-language-label, .user-name, .logout-text {
-      display: none;
-  }
-  
-  .language-display {
-      display: none;
+      margin-right: 0.5rem;
+      gap: 0.8rem;
   }
   
   .mobile-menu-toggle {
@@ -1206,24 +1212,16 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .page-title {
-      font-size: 1.8rem;
-  }
-  
-  .page-title-container {
-      padding: 1rem 0;
-  }
-  
   .content-below-navbar {
-      padding-top: 80px;
+      padding-top: 70px;
   }
   
   .nav-actions {
-      gap: 0.8rem;
+      gap: 0.5rem;
   }
   
-  .user-language-section, .language-section {
-      display: none;
+  .language-icon-selector {
+    margin-right: 0.3rem;
   }
 }
 
@@ -1231,22 +1229,29 @@ footer {
   .page-title {
       font-size: 1.5rem;
   }
-  
-  .logo {
-      font-size: 1.5rem;
-  }
 }
 
 @media (max-width: 400px) {
-  .logo {
-      font-size: 1.3rem;
-  }
-  
   .nav-actions {
-      gap: 0.5rem;
+      gap: 0.3rem;
   }
   
   .language-selector-wrapper {
-      display: none;
+      width: 40px;
+  }
+  
+  .selected-language {
+      padding: 0.3rem 0.4rem;
+  }
+  
+  .user-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+  
+  .btn-icon {
+    width: 36px;
+    height: 36px;
   }
 }

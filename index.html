@@ -15,7 +15,7 @@
     <nav class="navbar">
         <div class="logo">
             <i class="fas fa-language"></i>
-            <span>Lingua Nova</span>
+            <span class="logo-text">Lingua Nova</span>
         </div>
         
         <div class="nav-links" id="nav-links">
@@ -53,14 +53,16 @@
         </div>
         
         <div class="nav-actions">
-            <div class="language-section">
-                <span class="learning-label" data-translate="learningLabel">Aprendendo:</span>
-                
+            <!-- Combo Aprendendo (agora com ícone) -->
+            <div class="language-icon-selector">
+                <div class="icon-tooltip">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="tooltip-text" data-translate="learningLabel">Aprendendo</span>
+                </div>
                 <div class="language-selector-wrapper">
                     <div class="language-selector">
                         <div class="selected-language" id="learning-language">
                             <img src="https://flagcdn.com/w20/us.png" alt="English">
-                            <span>English</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <ul class="language-options" id="learning-language-options">
@@ -113,13 +115,16 @@
                 </div>
             </div>
             
-            <div class="user-language-section">
-                <span class="user-language-label" data-translate="userLanguageLabel">Meu idioma:</span>
+            <!-- Combo Meu Idioma (agora com ícone) -->
+            <div class="language-icon-selector">
+                <div class="icon-tooltip">
+                    <i class="fas fa-globe"></i>
+                    <span class="tooltip-text" data-translate="userLanguageLabel">Meu idioma</span>
+                </div>
                 <div class="language-selector-wrapper">
                     <div class="language-selector">
                         <div class="selected-language" id="user-language">
                             <img src="https://flagcdn.com/w20/br.png" alt="Português">
-                            <span>PT</span>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <ul class="language-options" id="user-language-options">
@@ -172,14 +177,14 @@
                 </div>
             </div>
             
+            <!-- Usuário (apenas ícone) -->
             <div class="user-menu">
                 <div class="user-avatar">U</div>
-                <span class="user-name" data-translate="userName">Usuário</span>
             </div>
             
-            <button class="btn btn-outline logout-btn" onclick="logout()">
+            <!-- Botão Sair (apenas ícone) -->
+            <button class="btn btn-icon logout-btn" onclick="logout()" title="Sair">
                 <i class="fas fa-sign-out-alt"></i>
-                <span class="logout-text" data-translate="logoutButton">Sair</span>
             </button>
         </div>
         

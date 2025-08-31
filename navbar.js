@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Seletor de idiomas para Learning
+    // Seletor de idiomas para Learning (agora com ícone)
     const learningLanguageSelector = document.querySelector('#learning-language').closest('.language-selector');
     const learningSelectedLanguage = document.getElementById('learning-language');
     const learningLanguageOptions = document.getElementById('learning-language-options');
@@ -73,11 +73,9 @@ document.addEventListener('DOMContentLoaded', function() {
             option.addEventListener('click', function() {
                 const value = this.getAttribute('data-value');
                 const flag = this.getAttribute('data-flag');
-                const text = this.querySelector('span').textContent;
                 
                 // Atualizar o idioma selecionado
                 learningSelectedLanguage.querySelector('img').src = `https://flagcdn.com/w20/${flag}.png`;
-                learningSelectedLanguage.querySelector('span').textContent = text;
                 
                 // Marcar como selecionado
                 learningLanguageOptions.querySelectorAll('li').forEach(li => {
@@ -88,19 +86,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Fechar o menu
                 learningLanguageSelector.classList.remove('active');
                 
-                // Disparar evento de mudança
-                const event = new Event('change');
-                document.getElementById('learning-language').dispatchEvent(event);
-                
-                // Atualizar a página com o novo idioma
-                if (window.updateUITexts) {
-                    window.updateUITexts(value);
-                }
+                // Redirecionar para a página de estudo do idioma selecionado
+                window.location.href = `study-${value}.html`;
             });
         });
     }
     
-    // Seletor de idiomas para User
+    // Seletor de idiomas para User (agora com ícone)
     const userLanguageSelector = document.querySelector('#user-language').closest('.language-selector');
     const userSelectedLanguage = document.getElementById('user-language');
     const userLanguageOptions = document.getElementById('user-language-options');
@@ -123,11 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
             option.addEventListener('click', function() {
                 const value = this.getAttribute('data-value');
                 const flag = this.getAttribute('data-flag');
-                const text = this.querySelector('span').textContent;
                 
                 // Atualizar o idioma selecionado
                 userSelectedLanguage.querySelector('img').src = `https://flagcdn.com/w20/${flag}.png`;
-                userSelectedLanguage.querySelector('span').textContent = text;
                 
                 // Marcar como selecionado
                 userLanguageOptions.querySelectorAll('li').forEach(li => {
@@ -182,6 +172,16 @@ document.addEventListener('DOMContentLoaded', function() {
             e.stopPropagation();
         });
     });
+    
+    // Adicionar evento de clique para o menu do usuário
+    const userMenu = document.querySelector('.user-menu');
+    if (userMenu) {
+        userMenu.addEventListener('click', function() {
+            // Em uma aplicação real, isso abriria um menu de perfil
+            console.log('Abrir menu do usuário');
+            alert('Menu do usuário clicado');
+        });
+    }
 });
 
 // Logout function
@@ -189,40 +189,174 @@ function logout() {
     // In a real app, this would handle logout
     console.log('Logging out');
     alert('Funcionalidade de logout');
+    // Redirecionar para a página de login
+    // window.location.href = 'login.html';
 }
 
 // Função para atualizar textos da UI
 function updateUITexts(langCode) {
-    const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
+    // Esta função seria preenchida com as traduções reais
+    const translations = {
+        'pt': {
+            'navHome': 'Início',
+            'navDialogues': 'Diálogos',
+            'navStories': 'Histórias',
+            'navFlashcards': 'Flashcards',
+            'navMyDecks': 'Meus Decks',
+            'navCommunity': 'Comunidade',
+            'navCreateDeck': 'Criar Deck',
+            'navStatistics': 'Estatísticas',
+            'learningLabel': 'Aprendendo',
+            'userLanguageLabel': 'Meu idioma',
+            'userName': 'Usuário',
+            'logoutButton': 'Sair',
+            'pageTitle': 'Diálogos',
+            'chooseTheme': 'Escolha Seu Próximo Tema:',
+            'loadMore': 'Carregar Mais Temas',
+            'showLess': 'Mostrar Menos',
+            'startLearning': 'Comece a Aprender Agora!',
+            'Play': 'Ouvir',
+            'Traduzir': 'Traduzir'
+        },
+        'en': {
+            'navHome': 'Home',
+            'navDialogues': 'Dialogues',
+            'navStories': 'Stories',
+            'navFlashcards': 'Flashcards',
+            'navMyDecks': 'My Decks',
+            'navCommunity': 'Community',
+            'navCreateDeck': 'Create Deck',
+            'navStatistics': 'Statistics',
+            'learningLabel': 'Learning',
+            'userLanguageLabel': 'My language',
+            'userName': 'User',
+            'logoutButton': 'Logout',
+            'pageTitle': 'Dialogues',
+            'chooseTheme': 'Choose Your Next Theme:',
+            'loadMore': 'Load More Themes',
+            'showLess': 'Show Less',
+            'startLearning': 'Start Learning Now!',
+            'Play': 'Play',
+            'Traduzir': 'Translate'
+        },
+        'es': {
+            'navHome': 'Inicio',
+            'navDialogues': 'Diálogos',
+            'navStories': 'Historias',
+            'navFlashcards': 'Flashcards',
+            'navMyDecks': 'Mis Barajas',
+            'navCommunity': 'Comunidad',
+            'navCreateDeck': 'Crear Baraja',
+            'navStatistics': 'Estadísticas',
+            'learningLabel': 'Aprendiendo',
+            'userLanguageLabel': 'Mi idioma',
+            'userName': 'Usuario',
+            'logoutButton': 'Salir',
+            'pageTitle': 'Diálogos',
+            'chooseTheme': 'Elija Su Próximo Tema:',
+            'loadMore': 'Cargar Más Temas',
+            'showLess': 'Mostrar Menos',
+            'startLearning': '¡Comience a Aprender Ahora!',
+            'Play': 'Escuchar',
+            'Traduzir': 'Traducir'
+        }
+    };
+    
+    const selectedTranslations = translations[langCode] || translations['pt'];
     
     document.querySelectorAll('[data-translate]').forEach(element => {
         const key = element.getAttribute('data-translate');
-        if (translations[key]) {
-            element.textContent = translations[key];
+        if (selectedTranslations[key]) {
+            element.textContent = selectedTranslations[key];
         }
     });
     
     // Atualizar botões de tradução nos diálogos
-    updateDialogueButtons(langCode);
+    updateDialogueButtons(langCode, selectedTranslations);
 }
 
 // Atualizar botões de tradução nos diálogos
-function updateDialogueButtons(langCode) {
-    const translations = appConfig.data.translations[langCode] || appConfig.data.translations['pt'];
+function updateDialogueButtons(langCode, translations) {
+    const selectedTranslations = translations || {};
     
     document.querySelectorAll('.message-btn').forEach((button, index) => {
         if (index % 2 === 0) {
             // Botão de play/ouvir
             const btnText = button.querySelector('.btn-text');
             if (btnText) {
-                btnText.textContent = translations['Play'] || 'Ouvir';
+                btnText.textContent = selectedTranslations['Play'] || 'Ouvir';
             }
         } else {
             // Botão de traduzir
             const btnText = button.querySelector('.btn-text');
             if (btnText) {
-                btnText.textContent = translations['Traduzir'] || 'Traduzir';
+                btnText.textContent = selectedTranslations['Traduzir'] || 'Traduzir';
             }
         }
     });
+}
+
+// Inicializar tooltips
+function initTooltips() {
+    const tooltipElements = document.querySelectorAll('.icon-tooltip');
+    
+    tooltipElements.forEach(tooltip => {
+        tooltip.addEventListener('mouseenter', function() {
+            const tooltipText = this.querySelector('.tooltip-text');
+            if (tooltipText) {
+                tooltipText.style.visibility = 'visible';
+                tooltipText.style.opacity = '1';
+            }
+        });
+        
+        tooltip.addEventListener('mouseleave', function() {
+            const tooltipText = this.querySelector('.tooltip-text');
+            if (tooltipText) {
+                tooltipText.style.visibility = 'hidden';
+                tooltipText.style.opacity = '0';
+            }
+        });
+    });
+}
+
+// Inicializar quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function() {
+    initTooltips();
+    
+    // Configurar evento de mudança para o idioma do usuário
+    const userLanguage = document.getElementById('user-language');
+    if (userLanguage) {
+        userLanguage.addEventListener('change', function() {
+            const selectedOption = document.querySelector('#user-language-options li.selected');
+            if (selectedOption) {
+                const langCode = selectedOption.getAttribute('data-value');
+                if (window.updateUITexts) {
+                    window.updateUITexts(langCode);
+                }
+            }
+        });
+    }
+});
+
+// Adicionar função global para acesso externo
+window.updateUITexts = updateUITexts;
+
+// Função para simular o carregamento de um diálogo
+function loadDialogue(dialogueId) {
+    console.log('Carregando diálogo:', dialogueId);
+    // Em uma aplicação real, isso carregaria o diálogo do servidor
+    // e atualizaria a interface do usuário
+}
+
+// Função para simular a reprodução de áudio
+function playAudio(audioUrl) {
+    console.log('Reproduzindo áudio:', audioUrl);
+    // Em uma aplicação real, isso reproduziria o áudio
+}
+
+// Função para simular a tradução de texto
+function translateText(text, targetLang) {
+    console.log('Traduzindo texto:', text, 'para', targetLang);
+    // Em uma aplicação real, isso traduziria o texto
+    return text + ' (traduzido)';
 }

@@ -177,15 +177,25 @@
                 </div>
             </div>
             
-            <!-- Usuário (apenas ícone) -->
+            <!-- Usuário com menu dropdown (agora inclui o botão Sair) -->
             <div class="user-menu">
                 <div class="user-avatar">U</div>
+                <div class="user-dropdown-menu">
+                    <div class="user-dropdown-item" onclick="viewProfile()">
+                        <i class="fas fa-user"></i>
+                        <span data-translate="userProfile">Meu Perfil</span>
+                    </div>
+                    <div class="user-dropdown-item" onclick="openSettings()">
+                        <i class="fas fa-cog"></i>
+                        <span data-translate="userSettings">Configurações</span>
+                    </div>
+                    <div class="user-dropdown-divider"></div>
+                    <div class="user-dropdown-item logout-item" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-translate="logoutButton">Sair</span>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Botão Sair (apenas ícone) -->
-            <button class="btn btn-icon logout-btn" onclick="logout()" title="Sair">
-                <i class="fas fa-sign-out-alt"></i>
-            </button>
         </div>
         
         <div class="mobile-menu-toggle" id="mobile-menu-toggle">

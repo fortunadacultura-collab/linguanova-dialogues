@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     selector.classList.remove('active');
                 }
             });
+            
+            // Fechar menu do usuário se estiver aberto
+            closeUserMenu();
         });
         
         // Close menu when clicking on links
@@ -66,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (userLanguageSelector && userLanguageSelector.classList.contains('active')) {
                 userLanguageSelector.classList.remove('active');
             }
+            
+            // Fechar menu do usuário se estiver aberto
+            closeUserMenu();
         });
         
         // Selecionar um idioma
@@ -108,6 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (learningLanguageSelector && learningLanguageSelector.classList.contains('active')) {
                 learningLanguageSelector.classList.remove('active');
             }
+            
+            // Fechar menu do usuário se estiver aberto
+            closeUserMenu();
         });
         
         // Selecionar um idioma
@@ -140,8 +149,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Menu do usuário com dropdown
+    const userMenu = document.querySelector('.user-menu');
+    const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+    
+    if (userMenu && userDropdownMenu) {
+        userMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Fechar outros menus abertos
+            closeLanguageSelectors();
+            
+            // Alternar visibilidade do menu do usuário
+            const isVisible = userDropdownMenu.style.visibility === 'visible';
+            
+            if (isVisible) {
+                closeUserMenu();
+            } else {
+                openUserMenu();
+            }
+        });
+        
+        // Prevenir que o clique no menu propague
+        userDropdownMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+    
     // Fechar os menus ao clicar fora
     document.addEventListener('click', function(event) {
+        // Fechar menus de idioma
         const languageSelectors = document.querySelectorAll('.language-selector');
         languageSelectors.forEach(selector => {
             if (!event.target.closest('.language-selector') && selector.classList.contains('active')) {
@@ -155,6 +192,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdown.classList.remove('active');
             }
         });
+        
+        // Fechar menu do usuário ao clicar fora
+        if (!event.target.closest('.user-menu') && 
+            userDropdownMenu && 
+            userDropdownMenu.style.visibility === 'visible') {
+            closeUserMenu();
+        }
     });
     
     // Prevenir que o clique nos menus propague para o documento
@@ -173,23 +217,71 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Adicionar evento de clique para o menu do usuário
-    const userMenu = document.querySelector('.user-menu');
-    if (userMenu) {
-        userMenu.addEventListener('click', function() {
-            // Em uma aplicação real, isso abriria um menu de perfil
-            console.log('Abrir menu do usuário');
-            alert('Menu do usuário clicado');
+    // Inicializar tooltips
+    initTooltips();
+    
+    // Configurar evento de mudança para o idioma do usuário
+    const userLanguage = document.getElementById('user-language');
+    if (userLanguage) {
+        userLanguage.addEventListener('change', function() {
+            const selectedOption = document.querySelector('#user-language-options li.selected');
+            if (selectedOption) {
+                const langCode = selectedOption.getAttribute('data-value');
+                if (window.updateUITexts) {
+                    window.updateUITexts(langCode);
+                }
+            }
         });
     }
 });
 
+// Funções para o menu do usuário
+function openUserMenu() {
+    const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+    if (userDropdownMenu) {
+        userDropdownMenu.style.opacity = '1';
+        userDropdownMenu.style.visibility = 'visible';
+        userDropdownMenu.style.transform = 'translateY(0)';
+    }
+}
+
+function closeUserMenu() {
+    const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+    if (userDropdownMenu) {
+        userDropdownMenu.style.opacity = '0';
+        userDropdownMenu.style.visibility = 'hidden';
+        userDropdownMenu.style.transform = 'translateY(10px)';
+    }
+}
+
+function closeLanguageSelectors() {
+    const languageSelectors = document.querySelectorAll('.language-selector');
+    languageSelectors.forEach(selector => {
+        if (selector.classList.contains('active')) {
+            selector.classList.remove('active');
+        }
+    });
+}
+
+// Funções do menu do usuário
+function viewProfile() {
+    console.log('Abrindo perfil do usuário');
+    alert('Abrindo perfil do usuário');
+    closeUserMenu();
+}
+
+function openSettings() {
+    console.log('Abrindo configurações');
+    alert('Abrindo configurações');
+    closeUserMenu();
+}
+
 // Logout function
 function logout() {
-    // In a real app, this would handle logout
-    console.log('Logging out');
-    alert('Funcionalidade de logout');
-    // Redirecionar para a página de login
+    console.log('Efetuando logout');
+    alert('Logout realizado com sucesso!');
+    closeUserMenu();
+    // Em uma aplicação real, redirecionar para a página de login:
     // window.location.href = 'login.html';
 }
 
@@ -210,6 +302,8 @@ function updateUITexts(langCode) {
             'userLanguageLabel': 'Meu idioma',
             'userName': 'Usuário',
             'logoutButton': 'Sair',
+            'userProfile': 'Meu Perfil',
+            'userSettings': 'Configurações',
             'pageTitle': 'Diálogos',
             'chooseTheme': 'Escolha Seu Próximo Tema:',
             'loadMore': 'Carregar Mais Temas',
@@ -231,6 +325,8 @@ function updateUITexts(langCode) {
             'userLanguageLabel': 'My language',
             'userName': 'User',
             'logoutButton': 'Logout',
+            'userProfile': 'My Profile',
+            'userSettings': 'Settings',
             'pageTitle': 'Dialogues',
             'chooseTheme': 'Choose Your Next Theme:',
             'loadMore': 'Load More Themes',
@@ -252,6 +348,8 @@ function updateUITexts(langCode) {
             'userLanguageLabel': 'Mi idioma',
             'userName': 'Usuario',
             'logoutButton': 'Salir',
+            'userProfile': 'Mi Perfil',
+            'userSettings': 'Configuración',
             'pageTitle': 'Diálogos',
             'chooseTheme': 'Elija Su Próximo Tema:',
             'loadMore': 'Cargar Más Temas',
@@ -318,25 +416,6 @@ function initTooltips() {
         });
     });
 }
-
-// Inicializar quando o DOM estiver pronto
-document.addEventListener('DOMContentLoaded', function() {
-    initTooltips();
-    
-    // Configurar evento de mudança para o idioma do usuário
-    const userLanguage = document.getElementById('user-language');
-    if (userLanguage) {
-        userLanguage.addEventListener('change', function() {
-            const selectedOption = document.querySelector('#user-language-options li.selected');
-            if (selectedOption) {
-                const langCode = selectedOption.getAttribute('data-value');
-                if (window.updateUITexts) {
-                    window.updateUITexts(langCode);
-                }
-            }
-        });
-    }
-});
 
 // Adicionar função global para acesso externo
 window.updateUITexts = updateUITexts;

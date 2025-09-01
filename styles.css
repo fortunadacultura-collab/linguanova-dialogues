@@ -1193,39 +1193,6 @@ footer {
       gap: 0.8rem;
   }
   
-  /* GARANTIR QUE OS ÍCONES DE IDIOMA APAREÇAM NO MOBILE */
-  .language-icon-selector {
-    display: flex !important;
-    margin-right: 0.5rem;
-  }
-  
-  .language-selector-wrapper {
-    display: block !important;
-  }
-  
-  .icon-tooltip {
-    display: none !important;
-  }
-  
-  /* Ajustar espaçamento entre os ícones no mobile */
-  .nav-actions {
-    gap: 0.5rem !important;
-  }
-  
-  /* Ajustar tamanho dos seletores no mobile */
-  .language-selector-wrapper {
-    width: 40px !important;
-  }
-  
-  .selected-language {
-    padding: 0.3rem 0.4rem !important;
-  }
-  
-  .selected-language img {
-    width: 18px !important;
-    height: 13px !important;
-  }
-  
   .mobile-menu-toggle {
       display: flex;
   }
@@ -1270,16 +1237,11 @@ footer {
   }
   
   .language-selector-wrapper {
-      width: 36px !important;
+      width: 40px;
   }
   
   .selected-language {
-      padding: 0.25rem 0.3rem !important;
-  }
-  
-  .selected-language img {
-      width: 16px !important;
-      height: 12px !important;
+      padding: 0.3rem 0.4rem;
   }
   
   .user-avatar {
@@ -1291,26 +1253,5 @@ footer {
   .btn-icon {
     width: 36px;
     height: 36px;
-  }
-}
-
-/* ============================================
-   AJUSTES PARA OS ÍCONES NO MOBILE
-   ============================================ */
-
-/* Garantir que os ícones não desapareçam em nenhum breakpoint */
-.language-icon-selector {
-  display: flex;
-  align-items: center;
-}
-
-.language-selector-wrapper {
-  display: block;
-}
-
-/* Ajustes para a versão desktop (garantir consistência) */
-@media (min-width: 901px) {
-  .language-icon-selector .icon-tooltip {
-    display: flex;
   }
 }
